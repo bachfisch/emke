@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="fr" data-style="minimal">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Emmanuel Kervyn — papier, volumes, installations, vidéo</title>
+  <meta name="description" content="Emmanuel Kervyn (1959), artisan relieur d'art de profession : papier, volumes, installations, performance et vidéo.">
+  <meta name="author" content="Emmanuel Kervyn">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="canonical" href="https://www.emmanuelkervyn.com/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Emmanuel Kervyn">
+  <meta property="og:title" content="Emmanuel Kervyn — papier, volumes, installations, vidéo">
+  <meta property="og:description" content="Papier, volumes, installations, performance et vidéo.">
+  <meta property="og:url" content="https://www.emmanuelkervyn.com/">
+  <meta property="og:image" content="https://www.emmanuelkervyn.com/images/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="fr_BE">
+  <meta property="og:locale:alternate" content="de_DE">
+  <meta property="og:locale:alternate" content="en_GB">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <!-- Stil und Sprache vor dem ersten Rendern setzen (kein Aufflackern). -->
+  <script>
+    (function () {
+      var d = document.documentElement, q = new URLSearchParams(location.search);
+      function pick(p, k, ok) {
+        var v = q.get(p);
+        if (ok.indexOf(v) > -1) return v;
+        try { v = localStorage.getItem(k); } catch (e) { v = null; }
+        return ok.indexOf(v) > -1 ? v : null;
+      }
+      d.setAttribute("data-style", pick("style", "ek-style", ["minimal", "edel", "schrill"]) || "minimal");
+      var l = pick("lang", "ek-lang", ["fr", "de", "en"]);
+      if (l) d.lang = l;
+    })();
+  </script>
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/minimal.css">
+  <link rel="stylesheet" href="css/edel.css">
+  <link rel="stylesheet" href="css/schrill.css">
+</head>
+<body>
+  <div id="app">
+    <noscript>
+      <div class="noscript">
+        <h1>Emmanuel Kervyn</h1>
+        <p>Ce site nécessite JavaScript. · Diese Website benötigt JavaScript. · This website requires JavaScript.</p>
+        <p><a href="mailto:ekervyn@outlook.com">ekervyn@outlook.com</a></p>
+      </div>
+    </noscript>
+  </div>
+
+  <script src="content/content.js"></script>
+  <script src="content/media.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/vimeo.js"></script>
+  <script src="js/layouts/minimal.js"></script>
+  <script src="js/layouts/edel.js"></script>
+  <script src="js/layouts/schrill.js"></script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+/* ==========================================================================
+   Basis für alle drei Stile: Schriften, Reset, Hilfsklassen, gemeinsame
+   Komponenten (Umschalter, Werk-Figur, Video, Lightbox, Dialoge).
+   Die Stile überschreiben Farben und Formen über Custom Properties.
+   ========================================================================== */
+
+/* Schriften (lokal, SIL Open Font License, siehe fonts/OFL-*.txt) */
+@font-face {
+  font-family: "Instrument Sans";
+  src: url("../fonts/instrument-sans-wght.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Instrument Sans";
+  src: url("../fonts/instrument-sans-wght-italic.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("../fonts/cormorant-garamond-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("../fonts/cormorant-garamond-400-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("../fonts/cormorant-garamond-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("../fonts/cormorant-garamond-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("../fonts/bricolage-grotesque-wght.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Grundwerte – werden pro Stil überschrieben */
+:root {
+  --bg: #fff;
+  --fg: #111;
+  --muted: #555;
+  --accent: #c8102e;
+  --focus: #0047ff;
+  --line: #ddd;
+  --font: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font);
+  --lb-bg: rgba(12, 12, 12, 0.96);
+  --lb-fg: #f4f1ea;
+  --lb-muted: #b9b4aa;
+  color-scheme: light;
+}
+
+/* Reset */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3, h4, p, ul, ol, figure, blockquote, dl, dd { margin: 0; }
+ul[class], ol[class] { list-style: none; padding: 0; }
+img { display: block; max-width: 100%; height: auto; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+a { color: inherit; }
+iframe { border: 0; }
+html.has-dialog { overflow: hidden; }
+
+/* Hilfsklassen */
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+.skip-link {
+  position: fixed;
+  left: 1rem; top: -4rem;
+  z-index: 1000;
+  padding: 0.6rem 1rem;
+  background: var(--fg);
+  color: var(--bg);
+  text-decoration: none;
+  font-weight: 600;
+}
+.skip-link:focus { top: 1rem; }
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+:focus:not(:focus-visible) { outline: none; }
+
+.noscript { max-width: 40rem; margin: 4rem auto; padding: 0 1.25rem; font-family: system-ui, sans-serif; }
+
+/* --------------------------------------------------------------------------
+   Umschalter (Sprache / Stil)
+   -------------------------------------------------------------------------- */
+.switchers { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center; }
+.switch { display: inline-flex; flex-wrap: wrap; align-items: center; }
+.switch__btn {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 0.5rem;
+  line-height: 1;
+}
+.switch__btn[aria-pressed="true"] { cursor: default; }
+
+/* --------------------------------------------------------------------------
+   Werk-Figur
+   -------------------------------------------------------------------------- */
+.work { position: relative; }
+.work__open { display: block; width: 100%; cursor: zoom-in; }
+.work__open img { width: 100%; }
+.work__caption { display: flex; flex-direction: column; }
+.work__title { font-weight: 500; }
+.work__meta { color: var(--muted); }
+
+/* --------------------------------------------------------------------------
+   Video (Klick zum Laden)
+   -------------------------------------------------------------------------- */
+.video__stage {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  overflow: hidden;
+}
+.video__stage img,
+.video__load { position: absolute; inset: 0; width: 100%; height: 100%; }
+.video__stage img { object-fit: cover; }
+.video--still .video__stage img { object-fit: contain; }
+.video__load { display: block; cursor: pointer; }
+.video__play {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  padding: 0.75rem 1.1rem;
+  background: rgba(0, 0, 0, 0.72);
+  color: #fff;
+  font-size: 0.95rem;
+  line-height: 1;
+  white-space: nowrap;
+  transition: background-color 0.2s;
+}
+.video__load:hover .video__play,
+.video__load:focus-visible .video__play { background: #000; }
+.video__frame { position: absolute; inset: 0; width: 100%; height: 100%; }
+.video__caption { display: flex; flex-wrap: wrap; gap: 0 0.75rem; align-items: baseline; }
+.video__meta { color: var(--muted); }
+.video__note { font-size: 0.8rem; color: var(--muted); }
+
+/* --------------------------------------------------------------------------
+   Lightbox (natives <dialog>: Fokusfalle und Esc inklusive)
+   -------------------------------------------------------------------------- */
+.lightbox {
+  width: 100vw; height: 100vh; height: 100dvh;
+  max-width: none; max-height: none;
+  margin: 0; padding: 0;
+  border: 0;
+  background: var(--lb-bg);
+  color: var(--lb-fg);
+  font-family: var(--font);
+  overflow: hidden;
+}
+.lightbox::backdrop { background: var(--lb-bg); }
+.lightbox[open] { display: grid; place-items: center; }
+.lightbox__figure {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 0.9rem;
+  width: 100%; height: 100%;
+  padding: 4.5rem 4.5rem 1.5rem;
+}
+.lightbox__img {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: auto; height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.lightbox figcaption { flex: none; text-align: center; max-width: 60ch; }
+.lightbox__caption { display: flex; flex-direction: column; }
+.lightbox__title { font-size: 1.05rem; }
+.lightbox__meta, .lightbox__count { color: var(--lb-muted); font-size: 0.9rem; }
+.lightbox__btn {
+  position: absolute;
+  display: grid; place-items: center;
+  width: 3rem; height: 3rem;
+  font-size: 1.5rem; line-height: 1;
+  color: var(--lb-fg);
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+.lightbox__btn:hover { background: rgba(255, 255, 255, 0.12); }
+.lightbox__btn:focus-visible { outline-color: var(--lb-fg); }
+.lightbox__close { top: 0.75rem; right: 0.75rem; font-size: 2rem; }
+.lightbox__prev { left: 0.75rem; top: 50%; transform: translateY(-50%); }
+.lightbox__next { right: 0.75rem; top: 50%; transform: translateY(-50%); }
+.lightbox.is-single .lightbox__prev,
+.lightbox.is-single .lightbox__next { display: none; }
+
+@media (max-width: 700px) {
+  .lightbox__figure { padding: 4rem 0.75rem 5rem; }
+  .lightbox__prev, .lightbox__next { top: auto; bottom: 0.75rem; transform: none; }
+  .lightbox__prev { left: 25%; }
+  .lightbox__next { right: 25%; }
+}
+
+/* --------------------------------------------------------------------------
+   Impressum / Datenschutz
+   -------------------------------------------------------------------------- */
+.legal {
+  width: min(42rem, calc(100vw - 2rem));
+  max-height: calc(100dvh - 2rem);
+  padding: 0;
+  border: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+}
+.legal::backdrop { background: rgba(0, 0, 0, 0.6); }
+.legal__inner { padding: 2rem; display: grid; gap: 1rem; }
+.legal__title { font-family: var(--font-display); font-size: 1.6rem; line-height: 1.2; }
+.legal__close {
+  justify-self: start;
+  min-height: 44px;
+  padding: 0.5rem 1.2rem;
+  border: 1px solid currentColor;
+}
+
+.legal-links { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; }
+.translation-note { font-size: 0.85rem; color: var(--muted); }
+
+/* --------------------------------------------------------------------------
+   Bewegung reduzieren
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
