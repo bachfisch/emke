@@ -270,6 +270,23 @@
       const max = wide ? track.scrollWidth - track.clientWidth : document.documentElement.scrollHeight - innerHeight;
       const pos = wide ? track.scrollLeft : scrollY;
       bar.style.transform = `scaleX(${max > 0 ? pos / max : 0})`;
+      markCurrent(wide);
+    };
+    /* aktiver Bereich: letzte Tafel, deren Anfang das erste Drittel des Fensters erreicht hat */
+    const panels = [...track.querySelectorAll(".sc-panel")];
+    let current = null;
+    const markCurrent = (wide) => {
+      let id = panels[0].id;
+      for (const p of panels) {
+        const r = p.getBoundingClientRect();
+        if ((wide ? r.left : r.top) <= (wide ? innerWidth : innerHeight) / 3) id = p.id;
+      }
+      if (id === current) return;
+      current = id;
+      nav.querySelectorAll(".sc-nav__link").forEach((a) => {
+        if (a.dataset.id === id) a.setAttribute("aria-current", "location");
+        else a.removeAttribute("aria-current");
+      });
     };
     track.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -281,22 +298,17 @@
         (entries) => {
           for (const en of entries) {
             if (en.isIntersecting) en.target.classList.add("is-in");
-            if (en.isIntersecting && en.intersectionRatio > 0.15 && en.target.classList.contains("sc-panel")) {
-              nav.querySelectorAll(".sc-nav__link").forEach((a) => {
-                if (a.dataset.id === en.target.id) a.setAttribute("aria-current", "location");
-                else a.removeAttribute("aria-current");
-              });
-            }
           }
         },
-        { threshold: [0, 0.15] }
+        { threshold: 0 }
       );
-      track.querySelectorAll(".sc-panel, .sc-work").forEach((el) => io.observe(el));
+      track.querySelectorAll(".sc-work").forEach((el) => io.observe(el));
       cleanup.push(() => io.disconnect());
     } else {
       track.querySelectorAll(".sc-work").forEach((el) => el.classList.add("is-in"));
     }
 
+    onScroll();
     const onResize = () => onScroll();
     WIDE.addEventListener("change", onResize);
     cleanup.push(() => WIDE.removeEventListener("change", onResize));
