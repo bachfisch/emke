@@ -157,7 +157,7 @@
       { class: ["work", opts.cls].filter(Boolean).join(" "), style: opts.style },
       opts.label ? h("span", { class: "work__label", "aria-hidden": "true" }, opts.label) : null,
       btn,
-      opts.caption === false
+      opts.caption === false || (!title && !meta)
         ? null
         : h(
             "figcaption",

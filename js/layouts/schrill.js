@@ -60,9 +60,9 @@
           cls: `sc-work sc-work--${COLORS[i % 3]}`,
           sizes: "(max-width: 900px) 50vw, 30vw",
         });
-        fig.style.setProperty("--ar", Math.min(Math.max(iw / ih, 0.55), 1.9).toFixed(3));
+        fig.style.setProperty("--ar", Math.min(Math.max(iw / ih, 0.25), 1.9).toFixed(3));
         fig.style.setProperty("--tilt", tilt(seed, 3.5));
-        fig.style.setProperty("--shift", `${Math.round((rand(seed)() - 0.5) * 30)}px`);
+        fig.style.setProperty("--shift", `${-Math.round(rand(seed)() * 18)}px`);
         const img = fig.querySelector("img");
         img.style.clipPath = torn(seed, 1.6, 14);
         return fig;
