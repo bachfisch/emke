@@ -134,15 +134,6 @@ window.MEDIA = {
   "in-situ/blankenberge-sans-titre": [1013, 1813],
   "in-situ/oubli": [1100, 733],
   "contact/jamais-un-coup-de-des-belgacom": [800, 1075],
-  "videos/vimeo-868071867": [1280, 720],
-  "videos/vimeo-867880565": [1280, 720],
   "videos/vimeo-868799399": [1280, 720],
-  "videos/vimeo-936714673": [1280, 720],
-  "videos/vimeo-930802679": [1280, 720],
-  "videos/vimeo-976601098": [1280, 720],
-  "videos/vimeo-1123881740": [1280, 720],
-  "videos/vimeo-1212035053": [1280, 720],
-  "videos/vimeo-867901812": [1280, 720],
-  "videos/vimeo-868067985": [1280, 720],
-  "videos/vimeo-867836794": [1280, 720]
+  "videos/vimeo-867901812": [1280, 720]
 };

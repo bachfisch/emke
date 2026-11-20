@@ -184,8 +184,9 @@ MEDIA = [
 # Vimeo-Videos: das Posterbild (1280 px) wird einmalig über die oEmbed-API geholt
 # und liegt danach im Repo. Die Seite selbst stellt vor dem Klick keine Anfrage an Vimeo.
 VIMEO = [
-    "868071867", "867880565", "868799399", "936714673", "930802679", "976601098",
-    "1123881740", "1212035053", "867901812", "868067985", "867836794",
+    # Nur für Videos, deren Vorschaubild auf der alten Seite ein Screenshot war.
+    "868799399",  # façon contre façon
+    "867901812",  # scan
 ]
 
 # Open-Graph-Bild (1200 × 630) für Link-Vorschauen
