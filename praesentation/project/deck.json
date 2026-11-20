@@ -1,0 +1,22 @@
+{
+  "v": 5,
+  "createdOnFiles": { "v": 1, "at": "2026-11-20T21:30:00Z" },
+  "lists": "css",
+  "format": { "v": 1, "shared": ["project/deck.css"] },
+  "title": "Emmanuel Kervyn – Werkpräsentation",
+  "cover": "cover",
+  "order": ["cover", "statement", "bio", "ecritures", "papier", "papier-werke", "volumes", "volumes-werke", "in-situ", "videos", "nord", "ecrits", "ausstellungen", "kontakt"],
+  "sections": {
+    "s1": { "description": "Der Künstler und seine Haltung: Sans titre, ohne Titel, untitled.", "start": "cover" },
+    "s2": { "description": "Die Werkgruppen vom Blatt zum Volumen: Écritures, Papier, Volumes.", "start": "ecritures" },
+    "s3": { "description": "Arbeiten im Raum und in der Zeit: In Situ, Vidéos, Au Nord du Monde.", "start": "in-situ" },
+    "s4": { "description": "Texte, Ausstellungen und Kontakt.", "start": "ecrits" }
+  },
+  "faces": {
+    "instrument-sans": {
+      "family": "Instrument Sans",
+      "href": "https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&display=swap"
+    }
+  },
+  "designSystems": []
+}
